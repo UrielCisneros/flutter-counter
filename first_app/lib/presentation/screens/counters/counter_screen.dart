@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
 
-class CounterScreen extends StatelessWidget {
+class CounterScreen extends StatefulWidget {
   const CounterScreen({super.key});
 
-  void _inclement() {}
+  @override
+  State<CounterScreen> createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  int _clickCounter = 0;
+
+  void _inclement() {
+    setState(() {
+      _clickCounter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Counter Screen"),
+      ),
       floatingActionButton: FloatingActionButton(
           onPressed: _inclement, child: const Icon(Icons.plus_one)),
-      body: const Center(
+      body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "10",
-            style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+            "$_clickCounter",
+            style: const TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
           ),
           Text(
-            "clicks",
-            style: TextStyle(fontSize: 40),
+            'Click${_clickCounter == 1 ? '' : 's'}',
+            style: const TextStyle(fontSize: 40),
           )
         ],
       )),
